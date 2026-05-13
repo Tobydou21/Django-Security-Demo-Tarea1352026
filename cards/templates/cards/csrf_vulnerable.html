@@ -1,0 +1,19 @@
+{% extends "cards/base.html" %}
+{% block title %}CSRF Vulnerable{% endblock %}
+{% block content %}
+<div class="vulnerable">
+    <h2>⚠️ CSRF — Formulario Vulnerable</h2>
+    <p>Este formulario usa <code>@csrf_exempt</code>. Acepta POST de cualquier origen sin validar el token.</p>
+</div>
+{% if mensaje %}<div class="msg">{{ mensaje }}</div>{% endif %}
+<form method="post">
+    {# Sin {% csrf_token %} intencionalmente #}
+    <input type="text" name="autor" placeholder="Tu nombre" required>
+    <textarea name="contenido" placeholder="Comentario..." rows="3" required></textarea>
+    <button type="submit">Enviar comentario</button>
+</form>
+<h3>Comentarios:</h3>
+{% for c in comentarios %}
+<div class="card"><strong>{{ c.autor }}</strong>: {{ c.contenido }}</div>
+{% empty %}<p>Sin comentarios aún.</p>{% endfor %}
+{% endblock %}

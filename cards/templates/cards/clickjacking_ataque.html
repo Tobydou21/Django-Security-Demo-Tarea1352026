@@ -1,0 +1,22 @@
+{% extends "cards/base.html" %}
+{% block title %}Clickjacking — Ataque{% endblock %}
+{% block content %}
+<div class="vulnerable">
+    <h2>🎭 Simulación de ataque Clickjacking</h2>
+    <p>Ambos iframes apuntan a páginas de este mismo servidor. El protegido fallará.</p>
+</div>
+<h3>Iframe → Página VULNERABLE (carga correctamente)</h3>
+<div style="position:relative; width:100%; height:200px; border:2px solid red;">
+    <iframe src="/clickjacking/vulnerable/" style="width:100%;height:100%;opacity:0.5;"></iframe>
+    <div style="position:absolute;top:80px;left:20px;z-index:10;font-size:18px;color:red;">
+        ← El atacante superpone texto engañoso aquí
+    </div>
+</div>
+<h3>Iframe → Página SEGURA (debería bloquearse)</h3>
+<div style="border:2px solid green; padding:10px;">
+    <iframe src="/clickjacking/seguro/" style="width:100%;height:150px;" onerror="this.style.display='none'"
+        onload="document.getElementById('msg').textContent='El iframe cargó (revisá la consola para el error real)'">
+    </iframe>
+    <p id="msg" style="color:green;">Si ves este mensaje sin contenido del iframe, la protección funcionó.</p>
+</div>
+{% endblock %}

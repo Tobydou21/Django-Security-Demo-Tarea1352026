@@ -1,0 +1,9 @@
+{% extends "cards/base.html" %}
+{% block title %}Clickjacking Seguro{% endblock %}
+{% block content %}
+<div class="seguro">
+    <h2>✅ Clickjacking — Página Protegida</h2>
+    <p>Esta página tiene el header <code>X-Frame-Options: DENY</code>. No puede cargarse dentro de un iframe.</p>
+    <p>Si vas a <a href="/clickjacking/ataque/">/clickjacking/ataque/</a> verás que el iframe falla.</p>
+</div>
+{% endblock %}

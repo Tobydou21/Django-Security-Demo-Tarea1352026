@@ -1,0 +1,20 @@
+{% extends "cards/base.html" %}
+{% block title %}CSRF Seguro{% endblock %}
+{% block content %}
+<div class="seguro">
+    <h2>✅ CSRF — Formulario Protegido</h2>
+    <p>Este formulario incluye <code>{% templatetag openblock %} csrf_token {% templatetag closeblock %}</code>. Django
+        rechazará cualquier POST sin el token válido.</p>
+</div>
+{% if mensaje %}<div class="msg">{{ mensaje }}</div>{% endif %}
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="autor" placeholder="Tu nombre" required>
+    <textarea name="contenido" placeholder="Comentario..." rows="3" required></textarea>
+    <button type="submit">Enviar comentario</button>
+</form>
+<h3>Comentarios:</h3>
+{% for c in comentarios %}
+<div class="card"><strong>{{ c.autor }}</strong>: {{ c.contenido }}</div>
+{% empty %}<p>Sin comentarios aún.</p>{% endfor %}
+{% endblock %}

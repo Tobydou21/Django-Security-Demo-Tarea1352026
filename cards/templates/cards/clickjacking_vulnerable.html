@@ -1,0 +1,9 @@
+{% extends "cards/base.html" %}
+{% block title %}Clickjacking Vulnerable{% endblock %}
+{% block content %}
+<div class="vulnerable">
+    <h2>⚠️ Clickjacking — Página Vulnerable</h2>
+    <p>Esta página usa <code>@xframe_options_exempt</code>. Puede cargarse dentro de cualquier iframe.</p>
+    <button onclick="alert('¡Botón real clickeado!')">Botón sensible (ej: Transferir dinero)</button>
+</div>
+{% endblock %}
